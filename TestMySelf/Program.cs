@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using VaultSharp;
 using VaultSharp.V1.AuthMethods;
 using VaultSharp.V1.AuthMethods.AppRole;
+using VaultSharp.V1.AuthMethods.Token;
 
 namespace TestMySelf
 {
@@ -27,15 +28,24 @@ namespace TestMySelf
         private static async void Test()
         {
             IAuthMethodInfo authMethod;
-            // Initialize one of the several auth methods.
-            // authMethod = new TokenAuthMethodInfo("s.6DYy3mX1U5nvrPItdoLsRWaH");
+            authMethod = new TokenAuthMethodInfo("s.2XoNGn1zjYomLPbCUVyoDhfq");
 
-            authMethod = new AppRoleAuthMethodInfo("2d313f4c-214e-454f-efd0-3cb602f19305");
-    
-            // Initialize settings. You can also set proxies, custom delegates etc. here.
-            var vaultClientSettings = new VaultClientSettings("http://localhost:8200", authMethod);
+            var vaultClientSettings = new VaultClientSettings("http://127.0.0.1:8200", authMethod);
 
             IVaultClient vaultClient = new VaultClient(vaultClientSettings);
+
+            var roleName = "my-role";
+
+            var secretIdAsync = await vaultClient.V1.Auth.AppRole.GetSecretIdAsync(roleName);
+            var appRoleRoleId = await vaultClient.V1.Auth.AppRole.GetClientIdAsync(roleName);
+
+
+
+            //var authMethodNew = new AppRoleAuthMethodInfo(appRoleRoleId.Data.RoleId,"");
+            var authMethodNew = new AppRoleAuthMethodInfo(appRoleRoleId.Data.RoleId, secretIdAsync.Data.SecretId);
+            var vaultClientSettingsNew = new VaultClientSettings("http://127.0.0.1:8200", authMethodNew);
+            IVaultClient vaultClientNew = new VaultClient(vaultClientSettingsNew);
+
 
             // Use client to read a key-value secret.
             // var kv2Secret = await vaultClient.V1.Secrets.KeyValue.V2.ReadSecretAsync("secret-name");
@@ -46,9 +56,10 @@ namespace TestMySelf
             }
             var path = "my-secret";
             var mountPoint = "kv";
-            await vaultClient.V1.Secrets.KeyValue.V1.WriteSecretAsync(path, dic, mountPoint);
+            await vaultClientNew.V1.Secrets.KeyValue.V1.WriteSecretAsync(path, dic, mountPoint);
+            var d = vaultClientNew.V1.Auth;
 
-            var kv2Secret = await vaultClient.V1.Secrets.KeyValue.V1.ReadSecretAsync(path, mountPoint);
+            var kv2Secret = await vaultClientNew.V1.Secrets.KeyValue.V1.ReadSecretAsync(path, mountPoint);
             foreach (var data in kv2Secret.Data)
             {
                 Console.WriteLine($" Key :  {data.Key}  ,  Value :  {data.Value} ");

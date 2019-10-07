@@ -28,7 +28,7 @@ namespace VaultSharp.V1.AuthMethods
 
         public IAliCloudAuthMethod AliCloud => throw new NotImplementedException();
 
-        public IAppRoleAuthMethod AppRole => throw new NotImplementedException();
+        public IAppRoleAuthMethod AppRole => new AppRoleAuthMethod(_polymath);
 
         public IAWSAuthMethod AWS => throw new NotImplementedException();
 
