@@ -37,7 +37,7 @@ namespace TestMySelf
             var roleName = "my-role";
 
             var secretIdAsync = await vaultClient.V1.Auth.AppRole.GetSecretIdAsync(roleName);
-            var appRoleRoleId = await vaultClient.V1.Auth.AppRole.GetClientIdAsync(roleName);
+            var appRoleRoleId = await vaultClient.V1.Auth.AppRole.GetRoleIdAsync(roleName);
 
 
 
