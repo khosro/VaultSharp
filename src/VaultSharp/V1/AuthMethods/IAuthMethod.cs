@@ -3,7 +3,9 @@ using VaultSharp.V1.AuthMethods.AppRole;
 using VaultSharp.V1.AuthMethods.AWS;
 using VaultSharp.V1.AuthMethods.Azure;
 using VaultSharp.V1.AuthMethods.Cert;
+using VaultSharp.V1.AuthMethods.CloudFoundry;
 using VaultSharp.V1.AuthMethods.GitHub;
+using VaultSharp.V1.AuthMethods.Kerberos;
 using VaultSharp.V1.AuthMethods.Kubernetes;
 using VaultSharp.V1.AuthMethods.LDAP;
 using VaultSharp.V1.AuthMethods.Okta;
@@ -39,6 +41,11 @@ namespace VaultSharp.V1.AuthMethods
         IAzureAuthMethod Azure { get; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        ICloudFoundryAuthMethod CloudFoundry { get; }
+
+        /// <summary>
         /// Hmm.
         /// </summary>
         IGitHubAuthMethod GitHub { get; }
@@ -58,6 +65,12 @@ namespace VaultSharp.V1.AuthMethods
         /// 
         /// </summary>
         ILDAPAuthMethod LDAP { get; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        IKerberosAuthMethod Kerberos { get; }
 
 
         /// <summary>

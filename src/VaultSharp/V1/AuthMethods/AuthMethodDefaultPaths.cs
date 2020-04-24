@@ -11,10 +11,12 @@
         public const string JWT = "jwt";
         public const string Kubernetes = "kubernetes";
         public const string LDAP = "ldap";
+        public const string Kerberos = "kerberos";
         public const string Okta = "okta";
         public const string RADIUS = "radius";
         public const string Cert = "cert";
         public const string Token = "token";
         public const string UserPass = "userpass";
+        public const string CloudFoundry = "cf";
     }
 }

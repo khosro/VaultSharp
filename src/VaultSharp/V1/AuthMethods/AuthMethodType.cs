@@ -83,6 +83,14 @@ namespace VaultSharp.V1.AuthMethods
         public static AuthMethodType LDAP { get; } = new AuthMethodType(AuthMethodDefaultPaths.LDAP);
 
         /// <summary>
+        /// Gets the Kerberos type.
+        /// </summary>
+        /// <value>
+        /// The Kerberos.
+        /// </value>
+        public static AuthMethodType Kerberos { get; } = new AuthMethodType(AuthMethodDefaultPaths.Kerberos);
+
+        /// <summary>
         /// Gets the Okta type.
         /// </summary>
         /// <value>
@@ -121,6 +129,14 @@ namespace VaultSharp.V1.AuthMethods
         /// The generic.
         /// </value>
         public static AuthMethodType UserPass { get; } = new AuthMethodType(AuthMethodDefaultPaths.UserPass);
+
+        /// <summary>
+        /// Gets the Cloud Foundry type.
+        /// </summary>
+        /// <value>
+        /// The Cloud Foundry.
+        /// </value>
+        public static AuthMethodType CloudFoundry { get; } = new AuthMethodType(AuthMethodDefaultPaths.CloudFoundry);
 
         /// <summary>
         /// Gets the type type.
